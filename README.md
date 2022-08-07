@@ -1,13 +1,3 @@
-# Sample Hardhat Project
-
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-GAS_REPORT=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+# Diverse Up
+---
+Token upgrade pattern for legacy tokens that has been already deployed to the blockchain. Using the Diverse Up user interface users can upgrade their ERC20 token to varying different token presets that has been presented with OpenZeppelin. Diverse Up also generates exchange smart contract for the user's token holders to switch between their original token and newly upgraded tokens.
