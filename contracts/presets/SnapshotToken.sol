@@ -10,11 +10,15 @@ contract SnapshotToken is ERC20, ERC20Burnable, ERC20Snapshot, AccessControl {
     bytes32 public constant SNAPSHOT_ROLE = keccak256("SNAPSHOT_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    constructor(string memory _tokenName,string memory _tokenSymbol) 
+    constructor(string memory _tokenName,string memory _tokenSymbol,address _adminAddress) 
       ERC20(_tokenName,_tokenSymbol){
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(SNAPSHOT_ROLE, msg.sender);
         _grantRole(MINTER_ROLE, msg.sender);
+
+        _grantRole(DEFAULT_ADMIN_ROLE, _adminAddress);
+        _grantRole(SNAPSHOT_ROLE, _adminAddress);
+        _grantRole(MINTER_ROLE, _adminAddress);
     }
 
     function snapshot() public onlyRole(SNAPSHOT_ROLE) {

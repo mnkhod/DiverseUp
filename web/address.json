@@ -1,4 +1,5 @@
 { 
   "pausibleProxyContract": "0xc50c6773761090742bb321112A38dEe684e41118",
-  "permitProxyContract": "0x9f1000Fe3b06F45fbC547BFa6c05b"
+  "permitProxyContract": "0x42C8d63dc57713DeE9863Cd8c09Ab6fd0cBcC24a",
+  "snapshotProxyContract": "0x2deCF538Da53D804b0954B127ead1fFB4f2cF2f5"
 }

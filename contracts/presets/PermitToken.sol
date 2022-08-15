@@ -16,6 +16,7 @@ contract PermitToken is ERC20, ERC20Burnable, AccessControl, ERC20Permit {
         _grantRole(MINTER_ROLE, msg.sender);
 
         _grantRole(DEFAULT_ADMIN_ROLE, _adminAddress);
+        _grantRole(MINTER_ROLE, _adminAddress);
     }
 
     function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {

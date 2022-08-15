@@ -1,10 +1,10 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("PermitProxy Test", function () {
+describe("SnapshotProxy Test", function () {
   var owner,odko,amaraa;
   var mockTokenContract;
-  var permitProxyContract;
+  var snapshotProxyContract;
   var oldTokenAddress,newTokenAddress,exchangeAddress;
 
   var exchangeContract,newTokenContract;
@@ -19,12 +19,12 @@ describe("PermitProxy Test", function () {
     mockTokenContract = await MockToken.deploy();
     await mockTokenContract.deployed();
 
-    const PermitProxy = await ethers.getContractFactory("PermitProxy");
-    permitProxyContract = await PermitProxy.deploy();
-    await permitProxyContract.deployed();
+    const SnapshotProxy = await ethers.getContractFactory("SnapshotProxy");
+    snapshotProxyContract = await SnapshotProxy.deploy();
+    await snapshotProxyContract.deployed();
 
-    // Creating Permit v2 Contracts
-    let result = await ((await permitProxyContract.connect(odko).updateToken(
+    // Creating Snapshot v2 Contracts
+    let result = await ((await snapshotProxyContract.connect(odko).updateToken(
       mockTokenContract.address,
       "MockTokenV2",
       "MTNv2",
@@ -39,15 +39,15 @@ describe("PermitProxy Test", function () {
     exchangeAddress = updatedTokenEvent.args.exchange
 
     exchangeContract = await ethers.getContractAt('TokenExchange',exchangeAddress) 
-    newTokenContract = await ethers.getContractAt('PermitToken',newTokenAddress) 
+    newTokenContract = await ethers.getContractAt('SnapshotToken',newTokenAddress) 
 
     expect(await newTokenContract.name()).to.equal("MockTokenV2");
     expect(await newTokenContract.symbol()).to.equal("MTNv2");
 
     expect(await exchangeContract.hasRole(ADMIN_ROLE,odko.address)).to.equal(true);
 
-    expect(await exchangeContract.hasRole(ADMIN_ROLE,permitProxyContract.address)).to.equal(true);
-    expect(await newTokenContract.hasRole(ADMIN_ROLE,permitProxyContract.address)).to.equal(true);
+    expect(await exchangeContract.hasRole(ADMIN_ROLE,snapshotProxyContract.address)).to.equal(true);
+    expect(await newTokenContract.hasRole(ADMIN_ROLE,snapshotProxyContract.address)).to.equal(true);
   });
 
   it("Exchange - Deposit Test", async function () {
