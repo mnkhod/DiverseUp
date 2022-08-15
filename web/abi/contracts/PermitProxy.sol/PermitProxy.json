@@ -1,0 +1,4 @@
+[
+  "event UpdatedToken(address indexed,address indexed,address indexed)",
+  "function updateToken(address,string,string,address) returns (address, address)"
+]
