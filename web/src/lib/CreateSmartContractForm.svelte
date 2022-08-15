@@ -2,7 +2,11 @@
   import Swal from 'sweetalert2'
   import { ethers } from "ethers"
   import ContractAddress from '../../address.json'
+
   import PausibleProxyAbi from '../../abi/contracts/PausibleProxy.sol/PausibleProxy.json'
+  import PermitProxyAbi from '../../abi/contracts/PermitProxy.sol/PermitProxy.json'
+  import SnapshotProxyAbi from '../../abi/contracts/SnapshotProxy.sol/SnapshotProxy.json'
+  import VoteProxyAbi from '../../abi/contracts/VoteProxy.sol/VoteProxy.json'
 
   export let handleExitBtn;
 
@@ -23,9 +27,30 @@
   async function handleCreateToken(){
       // Mock Token Address - 0x582f598539dB91e3349b14f3B2459AA84deAb480
       deployBtnLoading = true
+      let contractProxyAddress = ""
+      let contractProxyAbi = {}
+
+      switch(tokenPresetOptions){
+          case "Pausible":
+            contractProxyAddress = ContractAddress.pausibleProxyContract
+            contractProxyAbi = PausibleProxyAbi
+            break;
+          case "Permit":
+            contractProxyAddress = ContractAddress.permitProxyContract
+            contractProxyAbi = PermitProxyAbi
+            break;
+          case "Vote":
+            contractProxyAddress = ContractAddress.voteProxyContract
+            contractProxyAbi = VoteProxyAbi
+            break;
+          case "Snapshot":
+            contractProxyAddress = ContractAddress.snapshotProxyContract
+            contractProxyAbi = SnapshotProxyAbi
+            break;
+      }
 
       try{
-        const pausibleProxyContract = new ethers.Contract(ContractAddress.pausibleProxyContract,PausibleProxyAbi, provider);
+        const pausibleProxyContract = new ethers.Contract(contractProxyAddress,contractProxyAbi, provider);
         const contract = pausibleProxyContract.connect(signer);
 
         let tx = await contract.updateToken(
@@ -139,19 +164,19 @@
       <div class="form-control">
         <label class="label cursor-pointer">
           <span class="label-text mr-2">Permit</span> 
-          <input type="radio" name="radio-6" class="radio checked:bg-red-500" bind:group={tokenPresetOptions} value={"Permit"} disabled />
+          <input type="radio" name="radio-6" class="radio checked:bg-red-500" bind:group={tokenPresetOptions} value={"Permit"} />
         </label>
       </div>
       <div class="form-control">
         <label class="label cursor-pointer">
           <span class="label-text mr-2">Vote</span> 
-          <input type="radio" name="radio-6" class="radio checked:bg-red-500" bind:group={tokenPresetOptions} value={"Vote"} disabled />
+          <input type="radio" name="radio-6" class="radio checked:bg-red-500" bind:group={tokenPresetOptions} value={"Vote"} />
         </label>
       </div>
       <div class="form-control">
         <label class="label cursor-pointer">
           <span class="label-text mr-2">Snapshot</span> 
-          <input type="radio" name="radio-6" class="radio checked:bg-red-500" bind:group={tokenPresetOptions} value={"Snapshot"} disabled />
+          <input type="radio" name="radio-6" class="radio checked:bg-red-500" bind:group={tokenPresetOptions} value={"Snapshot"} />
         </label>
       </div>
     </div>
