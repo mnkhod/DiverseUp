@@ -40,6 +40,7 @@
   let oldTokenAddress = "";
   let newTokenAddress = "";
   let amountInput = undefined;
+  console.log(exchangeAddress)
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
@@ -102,7 +103,6 @@
       errorAlert("Check console log!")
     }
 
-    exchangeAddress = "";
     oldTokenAddress = "";
     newTokenAddress = "";
     amountInput = undefined;
@@ -136,7 +136,6 @@
       errorAlert("Check console log!")
     }
 
-    exchangeAddress = "";
     oldTokenAddress = "";
     newTokenAddress = "";
     amountInput = undefined;
