@@ -12,9 +12,9 @@
   let metamaskState = false;
   const params = useParams();
 
-  $: exchangeAddress = $params.exchangeAddress;
-  $: oldTokenAddress = $params.oldTokenAddress;
-  $: newTokenAddress = $params.newTokenAddress;
+  /* $: exchangeAddress = $params.exchangeAddress; */
+  /* $: oldTokenAddress = $params.oldTokenAddress; */
+  /* $: newTokenAddress = $params.newTokenAddress; */
 
   const flakes = new Snowflakes({
       speed: 2,
